@@ -8,10 +8,10 @@ function AboutUs() {
       <p>Capstone batch number: 56</p>
       <h3>Team Members:</h3>
       <ul>
-        <li>[ID Number 1] - [Name 1]</li>
-        <li>[ID Number 2] - [Name 2]</li>
-        <li>[ID Number 3] - [Name 3]</li>
-        <li>[ID Number 4] - [Name 4]</li>
+        <li>[2200031557] - [Dhanush]</li>
+        <li>[2200032950] - [Pavan]</li>
+        <li>[2200030878] - [Gayathri]</li>
+        <li>[2200030197] - [Pavani]</li>
       </ul>
       {/* Remember to fill in your batchmates' details here */}
     </div>
