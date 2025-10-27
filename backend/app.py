@@ -62,7 +62,7 @@ except Exception as e:
 # !! PASTE YOUR NEW GROQ API KEY HERE !!
 try:
     client = Groq(
-        api_key='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', # <-- PASTE YOUR gsk_... TOKEN
+        api_key='paste your api key here', # <-- PASTE YOUR gsk_... TOKEN
     )
     print("Groq client configured.")
 except Exception as e:
