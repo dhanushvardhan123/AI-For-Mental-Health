@@ -24,11 +24,12 @@ CORS(app)
 
 # --- 2. Database Configuration ---
 db_config = {
-   'host': os.environ.get("DB_HOST", "localhost"),
+    'host': os.environ.get("DB_HOST", "localhost"),
     'user': os.environ.get("DB_USER", "root"),
     'password': os.environ.get("DB_PASSWORD", "root"),
     'database': os.environ.get("DB_NAME", "mental_health_db"),
-    'port': int(os.environ.get("DB_PORT", 3306))
+    'port': int(os.environ.get("DB_PORT", 3306)),
+    'ssl_disabled': False   # 🔥 ADD THIS LINE
 }
 
 def get_db_connection():
@@ -36,7 +37,7 @@ def get_db_connection():
         conn = mysql.connector.connect(**db_config)
         return conn
     except mysql.connector.Error as err:
-        print(f"Database connection error: {err}")
+        print("🔥 DB ERROR:", err)
         return None
 
 # --- 3. Load AI Models and Encoders ---
