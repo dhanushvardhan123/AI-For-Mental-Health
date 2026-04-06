@@ -34,11 +34,17 @@ db_config = {
 
 def get_db_connection():
     try:
+        print("🔍 Trying DB connection...")
+        print("HOST:", os.environ.get("DB_HOST"))
+        print("USER:", os.environ.get("DB_USER"))
+        print("PORT:", os.environ.get("DB_PORT"))
+
         conn = mysql.connector.connect(**db_config)
         print("✅ DB CONNECTED SUCCESSFULLY")
         return conn
-    except mysql.connector.Error as err:
-        print("🔥 DB ERROR:", err)
+
+    except Exception as err:
+        print("🔥 DB ERROR FULL:", err)
         return None
 
 # --- 3. Load AI Models and Encoders ---
