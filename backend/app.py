@@ -279,6 +279,6 @@ if __name__ == '__main__':
     if None in [face_model, text_model, speech_model, client]:
         print("!!! CRITICAL ERROR: One or more models failed !!!")
     
-    port = int(os.environ.get("PORT", 10000))
-    print(f"🚀 Running on port {port}")   # 🔥 ADD THIS LINE
+    port = int(os.environ.get("PORT"))
+    print(f"🚀 Running on port {port}")
     app.run(host="0.0.0.0", port=port)
