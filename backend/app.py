@@ -33,7 +33,8 @@ db_config = {
     'password': os.environ.get("DB_PASSWORD", "root"),
     'database': os.environ.get("DB_NAME", "mental_health_db"),
     'port': int(os.environ.get("DB_PORT", 3306)),
-    'ssl_disabled': True   # 🔥 ADD THIS LINE
+    'ssl_disabled': False,
+    'ssl_verify_cert': False   # 🔥 ADD THIS LINE
 }
 
 def get_db_connection():
