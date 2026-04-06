@@ -35,10 +35,11 @@ db_config = {
 def get_db_connection():
     try:
         conn = mysql.connector.connect(**db_config)
+        print("✅ DB CONNECTED SUCCESSFULLY")
         return conn
     except mysql.connector.Error as err:
         print("🔥 DB ERROR:", err)
-        return str(err)
+        return None
 
 # --- 3. Load AI Models and Encoders ---
 print("Loading models... This may take a moment.")
