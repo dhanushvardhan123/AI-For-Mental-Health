@@ -4,7 +4,7 @@ from flask_cors import CORS
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from tensorflow import keras
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pickle
 import numpy as np
@@ -52,9 +52,9 @@ print("Loading models... This may take a moment.")
 try:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-    face_model = load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'), compile=False)
-    text_model = load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'), compile=False)
-    speech_model = load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'), compile=False)
+    face_model = keras.models.load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'), compile=False)
+    text_model = keras.models.load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'), compile=False)
+    speech_model = keras.models.load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'), compile=False)
 
     with open(os.path.join(BASE_DIR, 'tokenizer.pickle'), 'rb') as handle:
         tokenizer = pickle.load(handle)
