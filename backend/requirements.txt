@@ -10,3 +10,4 @@ librosa
 soundfile
 opencv-python-headless
 python-dotenv
+groq
