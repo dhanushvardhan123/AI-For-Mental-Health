@@ -38,7 +38,7 @@ def get_db_connection():
         return conn
     except mysql.connector.Error as err:
         print("🔥 DB ERROR:", err)
-        return None
+        return str(err)
 
 # --- 3. Load AI Models and Encoders ---
 print("Loading models... This may take a moment.")
