@@ -55,9 +55,9 @@ print("Loading models... This may take a moment.")
 try:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-    face_model = keras.models.load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'), compile=False)
-    text_model = keras.models.load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'), compile=False)
-    speech_model = keras.models.load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'), compile=False)
+    face_model = keras.models.load_model(os.path.join(BASE_DIR, 'facial_emotion_model.keras'), compile=False)
+    text_model = keras.models.load_model(os.path.join(BASE_DIR, 'text_emotion_model.keras'), compile=False)
+    speech_model = keras.models.load_model(os.path.join(BASE_DIR, 'speech_emotion_model.keras'), compile=False)
 
     with open(os.path.join(BASE_DIR, 'tokenizer.pickle'), 'rb') as handle:
         tokenizer = pickle.load(handle)
@@ -282,6 +282,6 @@ if __name__ == '__main__':
     if None in [face_model, text_model, speech_model, client]:
         print("!!! CRITICAL ERROR: One or more models failed !!!")
     
-    port = int(os.environ.get("PORT"))
+    port = int(os.environ.get("PORT", 5000))
     print(f"🚀 Running on port {port}")
     app.run(host="0.0.0.0", port=port)

@@ -1,15 +1,15 @@
 from tensorflow.keras.models import load_model
 
-# Face model
+# Face
 model = load_model("facial_emotion_model.h5", compile=False)
-model.save("facial_emotion_model_new.h5")
+model.save("facial_emotion_model.keras")
 
-# Text model
+# Text
 model = load_model("text_emotion_model.h5", compile=False)
-model.save("text_emotion_model_new.h5")
+model.save("text_emotion_model.keras")
 
-# Speech model
+# Speech
 model = load_model("speech_emotion_model.h5", compile=False)
-model.save("speech_emotion_model_new.h5")
+model.save("speech_emotion_model.keras")
 
-print("✅ All models converted successfully")
+print("✅ Converted to .keras format")
