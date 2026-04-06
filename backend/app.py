@@ -277,8 +277,8 @@ Keep the response concise and easy to understand."""
 # --- 9. Run the App ---
 if __name__ == '__main__':
     if None in [face_model, text_model, speech_model, client]:
-        print("!!! CRITICAL ERROR: One or more models (or Groq client) failed to load. Server will run but predictions will fail. !!!")
+        print("!!! CRITICAL ERROR: One or more models failed !!!")
     
-    print("Starting Flask server...")
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
+    print(f"🚀 Running on port {port}")   # 🔥 ADD THIS LINE
     app.run(host="0.0.0.0", port=port)
