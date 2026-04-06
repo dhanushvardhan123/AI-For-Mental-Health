@@ -11,7 +11,6 @@ import numpy as np
 import librosa
 import cv2
 import base64
-import os
 import io
 from dotenv import load_dotenv
 import os
@@ -43,19 +42,22 @@ def get_db_connection():
 # --- 3. Load AI Models and Encoders ---
 print("Loading models... This may take a moment.")
 try:
-    face_model = load_model('facial_emotion_model.h5')
-    text_model = load_model('text_emotion_model.h5')
-    speech_model = load_model('speech_emotion_model.h5')
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-    with open('tokenizer.pickle', 'rb') as handle:
+    face_model = load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'))
+    text_model = load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'))
+    speech_model = load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'))
+
+    with open(os.path.join(BASE_DIR, 'tokenizer.pickle'), 'rb') as handle:
         tokenizer = pickle.load(handle)
-        
-    with open('speech_label_encoder.pickle', 'rb') as handle:
+
+    with open(os.path.join(BASE_DIR, 'speech_label_encoder.pickle'), 'rb') as handle:
         speech_label_encoder = pickle.load(handle)
-        
+
     haar_cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
     if not os.path.exists(haar_cascade_path):
         raise FileNotFoundError(f"Could not find Haar Cascade file at {haar_cascade_path}")
+
     face_cascade = cv2.CascadeClassifier(haar_cascade_path)
 
     print("Models loaded successfully.")
@@ -271,6 +273,6 @@ if __name__ == '__main__':
     if None in [face_model, text_model, speech_model, client]:
         print("!!! CRITICAL ERROR: One or more models (or Groq client) failed to load. Server will run but predictions will fail. !!!")
     
-    print("Starting Flask server at http://localhost:5000")
+    print("Starting Flask server...")
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
