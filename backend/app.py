@@ -15,6 +15,7 @@ import io
 from dotenv import load_dotenv
 import os
 from groq import Groq
+import requests
 
 load_dotenv()
 
@@ -52,13 +53,40 @@ def get_db_connection():
 
 # --- 3. Load AI Models and Encoders ---
 print("Loading models... This may take a moment.")
+
+def download_model(url, filename):
+    if not os.path.exists(filename):
+        print(f"Downloading {filename}...")
+        r = requests.get(url)
+        with open(filename, 'wb') as f:
+            f.write(r.content)
+        print(f"{filename} downloaded.")
+
 try:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+    # 🔽 DOWNLOAD MODELS
+    download_model(
+        "https://drive.google.com/uc?export=download&id=17zdOZTd9xgjfYrKrH7j16n0lRGP__u8B",
+        os.path.join(BASE_DIR, "facial_emotion_model.keras")
+    )
+
+    download_model(
+        "https://drive.google.com/uc?export=download&id=1wTYnE1eatSlWeGBVwPqXd7dEpoDQ3rhP",
+        os.path.join(BASE_DIR, "text_emotion_model.keras")
+    )
+
+    download_model(
+        "https://drive.google.com/uc?export=download&id=183-2Er2tRc_59jWQgxHt8Kq5nzNzwQxM",
+        os.path.join(BASE_DIR, "speech_emotion_model.keras")
+    )
+
+    # 🔽 LOAD MODELS (YOU MISSED THIS)
     face_model = keras.models.load_model(os.path.join(BASE_DIR, 'facial_emotion_model.keras'), compile=False)
     text_model = keras.models.load_model(os.path.join(BASE_DIR, 'text_emotion_model.keras'), compile=False)
     speech_model = keras.models.load_model(os.path.join(BASE_DIR, 'speech_emotion_model.keras'), compile=False)
 
+    # 🔽 LOAD OTHER FILES
     with open(os.path.join(BASE_DIR, 'tokenizer.pickle'), 'rb') as handle:
         tokenizer = pickle.load(handle)
 
