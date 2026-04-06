@@ -6,3 +6,5 @@ pandas
 scikit-learn
 keras
 mysql-connector-python
+librosa
+soundfile
