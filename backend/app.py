@@ -33,7 +33,7 @@ db_config = {
     'password': os.environ.get("DB_PASSWORD", "root"),
     'database': os.environ.get("DB_NAME", "mental_health_db"),
     'port': int(os.environ.get("DB_PORT", 3306)),
-    'ssl_disabled': False   # 🔥 ADD THIS LINE
+    'ssl_disabled': True   # 🔥 ADD THIS LINE
 }
 
 def get_db_connection():
@@ -49,7 +49,7 @@ def get_db_connection():
 
     except Exception as err:
         print("🔥 DB ERROR FULL:", err)
-        return None
+        return str(err)
 
 # --- 3. Load AI Models and Encoders ---
 print("Loading models... This may take a moment.")
@@ -178,7 +178,8 @@ def register():
     password = data['password']
     hashed_password = generate_password_hash(password)
     conn = get_db_connection()
-    if conn is None: return jsonify({'message': 'Database connection error'}), 500
+    if isinstance(conn, str):
+        return jsonify({'message': conn}), 500
     cursor = conn.cursor()
     try:
         cursor.execute("INSERT INTO users (username, password_hash) VALUES (%s, %s)", (username, hashed_password))
@@ -199,7 +200,8 @@ def login():
     username = data['username']
     password = data['password']
     conn = get_db_connection()
-    if conn is None: return jsonify({'message': 'Database connection error'}), 500
+    if isinstance(conn, str):
+        return jsonify({'message': conn}), 500
     cursor = conn.cursor(dictionary=True)
     try:
         cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
