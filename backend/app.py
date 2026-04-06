@@ -25,10 +25,11 @@ CORS(app)
 
 # --- 2. Database Configuration ---
 db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'root', # Your password
-    'database': 'mental_health_db'
+   'host': os.environ.get("DB_HOST", "localhost"),
+    'user': os.environ.get("DB_USER", "root"),
+    'password': os.environ.get("DB_PASSWORD", "root"),
+    'database': os.environ.get("DB_NAME", "mental_health_db"),
+    'port': int(os.environ.get("DB_PORT", 3306))
 }
 
 def get_db_connection():
@@ -271,4 +272,5 @@ if __name__ == '__main__':
         print("!!! CRITICAL ERROR: One or more models (or Groq client) failed to load. Server will run but predictions will fail. !!!")
     
     print("Starting Flask server at http://localhost:5000")
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
