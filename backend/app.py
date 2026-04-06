@@ -52,9 +52,9 @@ print("Loading models... This may take a moment.")
 try:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-face_model = load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'), compile=False)
-text_model = load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'), compile=False)
-speech_model = load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'), compile=False)
+    face_model = load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'), compile=False)
+    text_model = load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'), compile=False)
+    speech_model = load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'), compile=False)
 
     with open(os.path.join(BASE_DIR, 'tokenizer.pickle'), 'rb') as handle:
         tokenizer = pickle.load(handle)
@@ -63,12 +63,10 @@ speech_model = load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'), com
         speech_label_encoder = pickle.load(handle)
 
     haar_cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
-    if not os.path.exists(haar_cascade_path):
-        raise FileNotFoundError(f"Could not find Haar Cascade file at {haar_cascade_path}")
-
     face_cascade = cv2.CascadeClassifier(haar_cascade_path)
 
     print("Models loaded successfully.")
+
 except Exception as e:
     print(f"Error loading models: {e}")
     face_model = text_model = speech_model = None
