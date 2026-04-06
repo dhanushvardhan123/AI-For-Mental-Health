@@ -13,7 +13,11 @@ import cv2
 import base64
 import os
 import io
-from groq import Groq # <-- NEW IMPORT
+from dotenv import load_dotenv
+import os
+from groq import Groq
+
+load_dotenv()
 
 # --- 1. Initialize App and CORS ---
 app = Flask(__name__)
@@ -62,8 +66,8 @@ except Exception as e:
 # !! PASTE YOUR NEW GROQ API KEY HERE !!
 try:
     client = Groq(
-        api_key='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', # <-- PASTE YOUR gsk_... TOKEN
-    )
+api_key=os.getenv("GROQ_API_KEY"),  
+  )
     print("Groq client configured.")
 except Exception as e:
     print(f"Error configuring Groq: {e}")
