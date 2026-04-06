@@ -1,6 +1,7 @@
 flask
-tensorflow
+flask-cors
+tensorflow-cpu==2.12.0
 numpy
 pandas
 scikit-learn
-pickle-mixin
+keras
