@@ -52,9 +52,9 @@ print("Loading models... This may take a moment.")
 try:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-    face_model = load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'))
-    text_model = load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'))
-    speech_model = load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'))
+face_model = load_model(os.path.join(BASE_DIR, 'facial_emotion_model.h5'), compile=False)
+text_model = load_model(os.path.join(BASE_DIR, 'text_emotion_model.h5'), compile=False)
+speech_model = load_model(os.path.join(BASE_DIR, 'speech_emotion_model.h5'), compile=False)
 
     with open(os.path.join(BASE_DIR, 'tokenizer.pickle'), 'rb') as handle:
         tokenizer = pickle.load(handle)
