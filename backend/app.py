@@ -21,6 +21,9 @@ load_dotenv()
 # --- 1. Initialize App and CORS ---
 app = Flask(__name__)
 CORS(app)
+@app.route('/')
+def home():
+    return "Backend is running 🚀"
 
 # --- 2. Database Configuration ---
 db_config = {
