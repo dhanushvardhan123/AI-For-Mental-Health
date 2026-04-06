@@ -8,3 +8,4 @@ keras
 mysql-connector-python
 librosa
 soundfile
+opencv-python-headless
