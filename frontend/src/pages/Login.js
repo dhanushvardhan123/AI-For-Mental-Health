@@ -1,24 +1,23 @@
-// src/pages/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Removed 'useNavigate'
+import { Link } from 'react-router-dom';
+
+const API = "https://ai-for-mental-health.onrender.com"; // ✅ ADD THIS
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  // const navigate = useNavigate(); // This line was unused and removed
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      // Send login request to the Flask server
-      const response = await axios.post('http://localhost:5000/login', {
+      const response = await axios.post(`${API}/login`, { // ✅ FIXED
         username,
         password,
       });
-      // Call the onLogin function from App.js
+
       onLogin(response.data.username);
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');

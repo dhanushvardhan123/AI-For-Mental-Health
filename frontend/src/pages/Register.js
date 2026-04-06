@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+const API = "https://ai-for-mental-health.onrender.com";
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ function Register() {
 
     try {
       // Send register request to the Flask server
-      await axios.post('http://localhost:5000/register', {
+      await axios.post(`${API}/register`, {
         username,
         password,
       });
