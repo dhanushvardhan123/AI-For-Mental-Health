@@ -57,14 +57,23 @@ def get_db_connection():
 print("Loading models... This may take a moment.")
 
 def download_model(file_id, output):
-    if not os.path.exists(output):
-        print(f"Downloading {output}...")
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, output, quiet=False)
-        print(f"{output} downloaded.")
+    print(f"Downloading {output}...")   # remove condition
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    gdown.download(url, output, quiet=False, fuzzy=True)
+    print(f"{output} downloaded.")
 
 try:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # 🔥 DELETE OLD MODEL FILES (IMPORTANT)
+    for file in [
+        "facial_emotion_model.keras",
+        "text_emotion_model.keras",
+        "speech_emotion_model.keras"
+    ]:
+        path = os.path.join(BASE_DIR, file)
+        if os.path.exists(path):
+            os.remove(path)
+            print(f"Deleted old file: {file}")
 
     # 🔽 DOWNLOAD MODELS
     download_model(
