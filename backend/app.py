@@ -15,8 +15,7 @@ import io
 from dotenv import load_dotenv
 import os
 from groq import Groq
-#import requests
-import gdown
+import requests
 
 load_dotenv()
 
@@ -57,11 +56,19 @@ def get_db_connection():
 print("Loading models... This may take a moment.")
 
 def download_model(file_id, output):
-    print(f"Downloading {output}...")   # remove condition
+    print(f"Downloading {output}...")
     url = f"https://drive.google.com/uc?export=download&id={file_id}"
-    gdown.download(url, output, quiet=False, fuzzy=True)
-    print(f"{output} downloaded.")
 
+    response = requests.get(url, stream=True, timeout=60)
+    if response.status_code != 200:
+        raise Exception(f"Failed to download {output}")
+
+    with open(output, "wb") as f:
+        for chunk in response.iter_content(1024):
+            if chunk:
+                f.write(chunk)
+
+    print(f"{output} downloaded.")
 try:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     # 🔥 DELETE OLD MODEL FILES (IMPORTANT)

@@ -17,3 +17,4 @@ opencv-python-headless
 python-dotenv
 groq
 gdown
+requests
