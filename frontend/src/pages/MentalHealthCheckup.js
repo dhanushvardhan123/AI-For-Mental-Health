@@ -6,7 +6,7 @@ import GAD7Questions from '../components/GAD7Questions';
 
 // Create an instance of axios to talk to our backend
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://ai-for-mental-health.onrender.com',
 });
 
 function MentalHealthCheckup() {
